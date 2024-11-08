@@ -14,7 +14,11 @@ import { Link } from 'react-router-dom';
 const GROUPS = {
     WMS: [
         {
-            title: 'Global GFS View',
+            title: 'Global ERA5 Temperature',
+            path: '/wms/era5-globe',
+        },
+        {
+            title: 'Global GFS Wind Gust',
             path: '/wms/gfs-globe',
         },
     ],
