@@ -5,7 +5,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import './index.css'
-import Root from './roott.tsx';
+import Root from './root.tsx';
 import Wms from './views/wms.tsx';
 
 const router = createBrowserRouter([
