@@ -21,7 +21,7 @@ import {
 import { SelectTrigger } from '@radix-ui/react-select';
 import { useQuery } from '@tanstack/react-query';
 import * as mapbox from 'mapbox-gl';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from 'recharts';
 
 async function fetchGfsPointTimeseries(
@@ -36,9 +36,16 @@ async function fetchGfsPointTimeseries(
     const referenceTime = new Date(data.domain.axes.t.values[0] + 'Z');
     const values = data.ranges[variable].values as number[];
 
+    let conversion = (value: any) => value;
+    if (variable === 't2m') {
+        conversion = (value) => value - 273.15; // kelvin to celsius
+    } else if (variable === 'prate') {
+        conversion = (value) => value * 3600; // m/s to mm/hr
+    }
+
     return steps.map((step, i) => ({
         time: new Date(referenceTime.getTime() + step / 1e6),
-        value: values[i],
+        value: conversion(values[i]),
     }));
 }
 
@@ -62,6 +69,21 @@ export default function GfsPointTimeseriesEDR() {
             );
         },
     });
+
+    // Prevent drawer from blocking pointer events when open
+    // https://github.com/emilkowalski/vaul/issues/497#issuecomment-2457929052
+    useEffect(() => {
+        if (drawerOpen) {
+            // Pushing the change to the end of the call stack
+            const timer = setTimeout(() => {
+                document.body.style.pointerEvents = '';
+            }, 0);
+    
+            return () => clearTimeout(timer);
+        } else {
+            document.body.style.pointerEvents = 'auto';
+        }
+    }, [drawerOpen]);
 
     useEffect(() => {
         if (!mapRef.current) return;
@@ -100,13 +122,13 @@ export default function GfsPointTimeseriesEDR() {
                                     </SelectTrigger>
                                     <SelectContent>
                                         <SelectItem value="t2m">
-                                            Air Temperature
+                                            Air Temperature (°C)
                                         </SelectItem>
                                         <SelectItem value="gust">
-                                            Wind Gust
+                                            Wind Gust (m/s)
                                         </SelectItem>
                                         <SelectItem value="prate">
-                                            Precipitation
+                                            Precipitation (mm/hr)
                                         </SelectItem>
                                     </SelectContent>
                                 </Select>
@@ -166,7 +188,22 @@ export default function GfsPointTimeseriesEDR() {
                                 <ChartTooltip
                                     cursor={false}
                                     content={
-                                        <ChartTooltipContent indicator="line" />
+                                        <ChartTooltipContent
+                                            indicator="line"
+                                            labelFormatter={(
+                                                _value,
+                                                payload,
+                                            ) => {
+                                                return payload[0].payload.time.toLocaleDateString(
+                                                    'en-US',
+                                                    {
+                                                        day: 'numeric',
+                                                        month: 'short',
+                                                        hour: 'numeric',
+                                                    },
+                                                );
+                                            }}
+                                        />
                                     }
                                 />
                             </AreaChart>
@@ -174,7 +211,6 @@ export default function GfsPointTimeseriesEDR() {
                     )}
                 </DrawerContent>
             </Drawer>
-
             <Map
                 initialCenter={[-74.5, 40]}
                 initialZoom={6}
