@@ -12,6 +12,13 @@ import {
     DrawerTitle,
     DrawerTrigger,
 } from '@/components/ui/drawer';
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectValue,
+} from '@/components/ui/select';
+import { SelectTrigger } from '@radix-ui/react-select';
 import { useQuery } from '@tanstack/react-query';
 import * as mapbox from 'mapbox-gl';
 import { useEffect, useRef, useState } from 'react';
@@ -31,13 +38,15 @@ async function fetchGfsPointTimeseries(
 
     return steps.map((step, i) => ({
         time: new Date(referenceTime.getTime() + step / 1e6),
-        value: values[i] - 273.15, //convert to Celsius
+        value: values[i],
     }));
 }
 
 export default function GfsPointTimeseriesEDR() {
     const mapRef = useRef<mapbox.Map>(null);
     const mapContainerRef = useRef<HTMLDivElement>(null);
+    const markerRef = useRef<mapbox.Marker | null>(null);
+
     const [drawerOpen, setDrawerOpen] = useState(false);
     const [selectedPoint, setSelectedPoint] = useState<mapbox.LngLat | null>(
         null,
@@ -47,7 +56,6 @@ export default function GfsPointTimeseriesEDR() {
         queryKey: ['gfs-point-timeseries', selectedPoint, selectedVariable],
         queryFn: async () => {
             if (!selectedPoint) return [];
-            console.log(selectedPoint, selectedVariable);
             return await fetchGfsPointTimeseries(
                 selectedPoint,
                 selectedVariable,
@@ -64,13 +72,45 @@ export default function GfsPointTimeseriesEDR() {
         });
     }, [mapRef.current]);
 
+    useEffect(() => {
+        if (!mapRef.current || !selectedPoint) return;
+
+        markerRef.current = new mapbox.Marker()
+            .setLngLat(selectedPoint)
+            .addTo(mapRef.current);
+
+        return () => {
+            markerRef.current?.remove();
+        };
+    }, [selectedPoint]);
+
     return (
         <div className="h-full w-full">
-            <Drawer open={drawerOpen}>
+            <Drawer open={drawerOpen} modal={false}>
                 <DrawerContent>
                     <DrawerHeader className="flex flex-row justify-between items-start align-middle w-full">
                         <div className="flex flex-col items-start">
-                            <DrawerTitle>Air Temperature (°C)</DrawerTitle>
+                            <DrawerTitle>
+                                <Select
+                                    defaultValue="t2m"
+                                    onValueChange={setSelectedVariable}
+                                >
+                                    <SelectTrigger>
+                                        <SelectValue />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        <SelectItem value="t2m">
+                                            Air Temperature
+                                        </SelectItem>
+                                        <SelectItem value="gust">
+                                            Wind Gust
+                                        </SelectItem>
+                                        <SelectItem value="prate">
+                                            Precipitation
+                                        </SelectItem>
+                                    </SelectContent>
+                                </Select>
+                            </DrawerTitle>
                             <p>
                                 Location: {selectedPoint?.lat.toFixed(2)}°,{' '}
                                 {selectedPoint?.lng.toFixed(2)}°
@@ -81,12 +121,12 @@ export default function GfsPointTimeseriesEDR() {
                         </DrawerTrigger>
                     </DrawerHeader>
                     {timeseriesData.isLoading && (
-                        <div className='h-64 flex justify-center items-center'>
+                        <div className="h-64 flex justify-center items-center">
                             <LoadingSpinner className="m-auto" />
                         </div>
                     )}
                     {timeseriesData.data && (
-                        <ChartContainer config={{}} className='h-64'>
+                        <ChartContainer config={{}} className="h-64">
                             <AreaChart
                                 accessibilityLayer
                                 data={timeseriesData.data}
