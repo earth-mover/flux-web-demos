@@ -2,7 +2,7 @@ import { Map } from '@/components/map';
 import * as mapbox from 'mapbox-gl';
 import { useEffect, useRef } from 'react';
 
-export default function Wms() {
+export default function GfsGlobeWMS() {
     const mapRef = useRef<mapbox.Map>(null);
     const mapContainerRef = useRef<HTMLDivElement>(null);
 
@@ -28,7 +28,7 @@ export default function Wms() {
                 }
             });
         });
-    }, [mapRef]);
+    }, [mapRef.current]);
 
     return (
         <>
