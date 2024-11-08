@@ -21,7 +21,7 @@ import {
 import { SelectTrigger } from '@radix-ui/react-select';
 import { useQuery } from '@tanstack/react-query';
 import * as mapbox from 'mapbox-gl';
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from 'recharts';
 
 async function fetchGfsPointTimeseries(
@@ -78,7 +78,7 @@ export default function GfsPointTimeseriesEDR() {
             const timer = setTimeout(() => {
                 document.body.style.pointerEvents = '';
             }, 0);
-    
+
             return () => clearTimeout(timer);
         } else {
             document.body.style.pointerEvents = 'auto';

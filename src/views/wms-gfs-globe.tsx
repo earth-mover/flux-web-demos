@@ -25,7 +25,7 @@ export default function GfsGlobeWMS() {
                 source: 'gfs',
                 paint: {
                     'raster-opacity': 0.5,
-                }
+                },
             });
         });
     }, [mapRef.current]);
