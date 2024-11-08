@@ -27,7 +27,7 @@ import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from 'recharts';
 async function fetchGfsPointTimeseries(
     point: mapbox.LngLat,
     variable: string,
-): Promise<{ time: Date; value: number }[]> {
+): Promise<{ time: number; value: number }[]> {
     const url = `https://earthmover-demos.compute.earthmover.io/edr/earthmover-demos/gfs/timeseries/edr/position?coords=POINT(${point.lng}%20${point.lat})&time=2024-11-04&f=cf_covjson&parameter-name=${variable}`;
 
     const response = await fetch(url);
@@ -44,7 +44,7 @@ async function fetchGfsPointTimeseries(
     }
 
     return steps.map((step, i) => ({
-        time: new Date(referenceTime.getTime() + step / 1e6),
+        time: referenceTime.getTime() + step / 1e6,
         value: conversion(values[i]),
     }));
 }
@@ -147,7 +147,7 @@ export default function GfsPointTimeseriesEDR() {
                             <LoadingSpinner className="m-auto" />
                         </div>
                     )}
-                    {timeseriesData.data && (
+                    {(timeseriesData.data && timeseriesData.data.length > 0) && (
                         <ChartContainer config={{}} className="h-96">
                             <AreaChart
                                 accessibilityLayer
@@ -164,13 +164,24 @@ export default function GfsPointTimeseriesEDR() {
                                     dataKey="time"
                                     tickLine={false}
                                     axisLine={false}
+                                    type="number"
+                                    domain={[
+                                        timeseriesData.data[0].time,
+                                        timeseriesData.data[
+                                            timeseriesData.data.length - 1
+                                        ].time,
+                                    ]}
                                     tickMargin={8}
-                                    tickFormatter={(value) =>
-                                        value.toLocaleDateString('en-US', {
-                                            day: 'numeric',
-                                            month: 'numeric',
-                                        })
-                                    }
+                                    tickFormatter={(value) => {
+                                        const date = new Date(value);
+                                        return date.toLocaleDateString(
+                                            'en-US',
+                                            {
+                                                day: 'numeric',
+                                                month: 'numeric',
+                                            },
+                                        );
+                                    }}
                                 />
                                 <YAxis
                                     tickLine={false}
@@ -194,7 +205,10 @@ export default function GfsPointTimeseriesEDR() {
                                                 _value,
                                                 payload,
                                             ) => {
-                                                return payload[0].payload.time.toLocaleDateString(
+                                                const date = new Date(
+                                                    payload[0].payload.time,
+                                                );
+                                                return date.toLocaleDateString(
                                                     'en-US',
                                                     {
                                                         day: 'numeric',
