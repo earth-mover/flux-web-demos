@@ -1,6 +1,6 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom';
 import './index.css';
 import Root from './root.tsx';
 import GlobeWMS from './views/wms-globe.tsx';
@@ -13,6 +13,10 @@ const router = createBrowserRouter([
         path: '/',
         element: <Root />,
         children: [
+            {
+                index: true,
+                element: <Navigate to={'wms/era5-globe'} />,
+            },
             {
                 path: 'wms/era5-globe',
                 element: (
