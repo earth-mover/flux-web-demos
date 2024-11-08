@@ -143,12 +143,12 @@ export default function GfsPointTimeseriesEDR() {
                         </DrawerTrigger>
                     </DrawerHeader>
                     {timeseriesData.isLoading && (
-                        <div className="h-64 flex justify-center items-center">
+                        <div className="h-96 flex justify-center items-center">
                             <LoadingSpinner className="m-auto" />
                         </div>
                     )}
                     {timeseriesData.data && (
-                        <ChartContainer config={{}} className="h-64">
+                        <ChartContainer config={{}} className="h-96">
                             <AreaChart
                                 accessibilityLayer
                                 data={timeseriesData.data}
