@@ -6,6 +6,7 @@ import Root from './root.tsx';
 import GfsGlobeWMS from './views/wms-gfs-globe.tsx';
 import GfsPointTimeseriesEDR from './views/edr-gfs-point-timeseries.tsx';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import GfsAreaScatterEDR from './views/edr-gfs-area-scatter.tsx';
 
 const router = createBrowserRouter([
     {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
                 path: 'edr/gfs-point-timeseries',
                 element: <GfsPointTimeseriesEDR />,
             },
+            {
+                path: 'edr/gfs-area-scatter',
+                element: <GfsAreaScatterEDR />,
+            }
         ],
     },
 ]);

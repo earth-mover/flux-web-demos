@@ -23,6 +23,10 @@ const GROUPS = {
             title: 'GFS Point Timeseries',
             path: '/edr/gfs-point-timeseries',
         },
+        // {
+        //     title: 'GFS Area Selector',
+        //     path: '/edr/gfs-area-scatter',
+        // }
     ],
 };
 
