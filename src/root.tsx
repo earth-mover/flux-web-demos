@@ -6,8 +6,13 @@ export default function Root() {
     return (
         <SidebarProvider defaultOpen={false}>
             <AppSidebar />
-            <main id="main" className="flex h-[100vh] w-[100vw]">
+            <div>
                 <SidebarTrigger className="z-30 absolute text-white" />
+            </div>
+            <main
+                id="main"
+                className="absolute bottom-0 top-0 left-0 right-0 flex h-[100vh] w-[100vw]"
+            >
                 <Outlet />
             </main>
         </SidebarProvider>
