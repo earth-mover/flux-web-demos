@@ -82,8 +82,22 @@ export default function GfsAreaScatterEDR() {
             type: 'circle',
             source: 'area',
             paint: {
-                'circle-color': 'red',
                 'circle-radius': 5,
+                'circle-color': [
+                    'interpolate',
+                    ['linear'],
+                    ['get', 't2m'],
+                    250,
+                    'purple',
+                    273,
+                    'blue',
+                    280,
+                    'green',
+                    290,
+                    'yellow',
+                    300,
+                    'red',
+                ]
             },
         });
 
