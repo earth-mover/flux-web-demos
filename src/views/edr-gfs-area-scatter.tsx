@@ -27,7 +27,6 @@ export default function GfsAreaScatterEDR() {
     const [areaUrl, setAreaUrl] = useState<string | null>(null);
 
     const updateLayer = useCallback((e: any) => {
-        console.log(e.features);
         const feature = e.features.at(0);
         if (!feature) return;
 
