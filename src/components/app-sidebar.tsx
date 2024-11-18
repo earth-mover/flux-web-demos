@@ -21,6 +21,10 @@ const GROUPS = {
             title: 'Global GFS Wind Gust',
             path: '/wms/gfs-globe',
         },
+        // {
+        //     title: 'HRRR CONUS Precipitation Rate',
+        //     path: '/wms/hrrr-conus',
+        // },
     ],
     EDR: [
         {
@@ -30,7 +34,11 @@ const GROUPS = {
         {
             title: 'GFS Area Selector',
             path: '/edr/gfs-area-scatter',
-        }
+        },
+        // {
+        //     title: 'HRRR Point Selector',
+        //     path: '/edr/hrrr-area-scatter',
+        // }
     ],
 };
 
