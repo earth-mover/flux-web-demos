@@ -35,10 +35,10 @@ const GROUPS = {
             title: 'GFS Area Selector',
             path: '/edr/gfs-area-scatter',
         },
-        // {
-        //     title: 'HRRR Point Selector',
-        //     path: '/edr/hrrr-area-scatter',
-        // }
+        {
+            title: 'HRRR Point Selector',
+            path: '/edr/hrrr-area-scatter',
+        }
     ],
 };
 
