@@ -36,7 +36,7 @@ const GROUPS = {
             path: '/edr/gfs-area-scatter',
         },
         {
-            title: 'HRRR Point Selector',
+            title: 'HRRR Area Precipitation Animation',
             path: '/edr/hrrr-area-scatter',
         }
     ],
