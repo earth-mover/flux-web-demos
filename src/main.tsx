@@ -22,13 +22,13 @@ const router = createBrowserRouter([
             {
                 path: 'wms/era5-globe',
                 element: (
-                    <GlobeWMS key='wms-era5' source="https://earthmover-demos.compute.earthmover.io/wms/earthmover-demos/era5-2m-temp/1x721x1440/wms?version=1.3.0&service=WMS&request=GetMap&layers=2m_temperature&styles=raster/default&width=512&height=512&tile={x},{y},{z}&crs=EPSG:3857&time=2021-12-31T12:00:00Z&colorscalerange=273,310" />
+                    <GlobeWMS key='wms-era5' source="https://demo.compute.earthmover.io/wms/earthmover-demos/era5-2m-temp/1x721x1440/wms?version=1.3.0&service=WMS&request=GetMap&layers=2m_temperature&styles=raster/default&width=512&height=512&tile={x},{y},{z}&crs=EPSG:3857&time=2021-12-31T12:00:00Z&colorscalerange=273,310" />
                 ),
             },
             {
                 path: 'wms/gfs-globe',
                 element: (
-                    <GlobeWMS key='wms-gfs' source="https://earthmover-demos.compute.earthmover.io/wms/earthmover-demos/gfs/solar/wms?version=1.3.0&service=WMS&request=GetMap&layers=gust&styles=raster/default&width=512&height=512&tile={x},{y},{z}&crs=EPSG:3857&time=2024-11-1T00:00:00Z&colorscalerange=0,40&step=1+hour" />
+                    <GlobeWMS key='wms-gfs' source="https://demo.compute.earthmover.io/wms/earthmover-demos/gfs/solar/wms?version=1.3.0&service=WMS&request=GetMap&layers=gust&styles=raster/default&width=512&height=512&tile={x},{y},{z}&crs=EPSG:3857&time=2024-11-1T00:00:00Z&colorscalerange=0,40&step=1+hour" />
                 ),
             },
             // {

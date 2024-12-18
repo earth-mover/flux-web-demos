@@ -28,7 +28,7 @@ async function fetchGfsPointTimeseries(
     point: mapbox.LngLat,
     variable: string,
 ): Promise<{ time: number; value: number }[]> {
-    const url = `https://earthmover-demos.compute.earthmover.io/edr/earthmover-demos/gfs/timeseries/edr/position?coords=POINT(${point.lng}%20${point.lat})&time=2024-11-04&f=cf_covjson&parameter-name=${variable}`;
+    const url = `https://demo.compute.earthmover.io/edr/earthmover-demos/gfs/timeseries/edr/position?coords=POINT(${point.lng}%20${point.lat})&time=2024-11-04&f=cf_covjson&parameter-name=${variable}`;
 
     const response = await fetch(url);
     const data = await response.json();
