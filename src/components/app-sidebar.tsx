@@ -13,10 +13,10 @@ import { Link } from 'react-router-dom';
 
 const GROUPS = {
     WMS: [
-        {
-            title: 'Global ERA5 Temperature',
-            path: '/wms/era5-globe',
-        },
+        // {
+        //     title: 'Global ERA5 Temperature',
+        //     path: '/wms/era5-globe',
+        // },
         {
             title: 'Global GFS Wind Gust',
             path: '/wms/gfs-globe',
@@ -35,10 +35,10 @@ const GROUPS = {
             title: 'GFS Area Selector',
             path: '/edr/gfs-area-scatter',
         },
-        {
-            title: 'HRRR Area Precipitation Animation',
-            path: '/edr/hrrr-area-scatter',
-        }
+        // {
+        //     title: 'HRRR Area Precipitation Animation',
+        //     path: '/edr/hrrr-area-scatter',
+        // }
     ],
 };
 

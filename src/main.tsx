@@ -8,7 +8,7 @@ import GfsPointTimeseriesEDR from './views/edr-gfs-point-timeseries.tsx';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import GfsAreaScatterEDR from './views/edr-gfs-area-scatter.tsx';
 //import NorthAmericaWMS from './views/wms-na.tsx';
-import HrrrAreaScatterEDR from './views/edr-hrrr-area-scatter.tsx';
+//import HrrrAreaScatterEDR from './views/edr-hrrr-area-scatter.tsx';
 
 const router = createBrowserRouter([
     {
