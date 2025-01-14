@@ -9,7 +9,7 @@ function createGfsAreaUrl(
     coords: { lng: number; lat: number }[],
     variables: string[],
 ) {
-    return `https://demo.compute.earthmover.io/edr/earthmover-demos/gfs/timeseries/edr/area?coords=POLYGON((${coords
+    return `https://compute.earthmover.io/v1/services/edr/earthmover-demos/gfs/main/timeseries/edr/area?coords=POLYGON((${coords
         .map((coord) => `${(coord.lng + 360.0) % 360} ${coord.lat}`)
         .join(
             ',',

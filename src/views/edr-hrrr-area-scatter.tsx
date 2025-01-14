@@ -13,7 +13,7 @@ function createHrrrAreaUrl(
     coords: { lng: number; lat: number }[],
     variables: string[],
 ) {
-    return `https://demo.compute.earthmover.io/edr/earthmover-demos/hrrr/solar/edr/area?coords=POLYGON((${coords
+    return `https://compute.earthmover.io/v1/services/edr/earthmover-demos/hrrr/6726845a0577bbbafb658fcc/solar/edr/area?coords=POLYGON((${coords
         .map((coord) => `${(coord.lng + 360.0) % 360} ${coord.lat}`)
         .join(
             ',',
