@@ -1,4 +1,4 @@
-# Earthmover Flux Demos
+# Earthmover Flux Web Demos
 
 A showcase for using Earthmover's Flux APIs to drive web applications, built with React and Mapbox
 
