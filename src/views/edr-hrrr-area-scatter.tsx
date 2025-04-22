@@ -69,6 +69,7 @@ export default function HrrrAreaScatterEDR() {
                 },
             });
 
+            // @ts-ignore
             mapRef.current?.addControl(mapDraw.current, 'top-right');
         });
 

@@ -55,6 +55,7 @@ export default function GfsAreaScatterEDR() {
                 },
             });
 
+            // @ts-ignore
             mapRef.current?.addControl(mapDraw.current, 'top-right');
         });
 
