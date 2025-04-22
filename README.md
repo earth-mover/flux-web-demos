@@ -1,6 +1,6 @@
-# Earthmover Query Service Demos
+# Earthmover Flux Demos
 
-A showcase for using Earthmover's Query Service to drive web applications, built with React and Mapbox
+A showcase for using Earthmover's Flux APIs to drive web applications, built with React and Mapbox
 
 ## Running Locally
 

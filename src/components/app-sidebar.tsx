@@ -47,7 +47,7 @@ export function AppSidebar() {
         <Sidebar>
             <SidebarContent>
                 <SidebarHeader>
-                    <h1 className="font-bold">Earthmover Endpoints</h1>
+                    <h1 className="font-bold">Earthmover Flux Demos</h1>
                 </SidebarHeader>
                 {Object.entries(GROUPS).map(([group, items]) => {
                     return (
